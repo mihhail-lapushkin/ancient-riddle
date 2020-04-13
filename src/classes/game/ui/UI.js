@@ -43,6 +43,8 @@ UI = (function() {
   }
 
   function endLoading() {
+    if (!loading) return;
+
     loading.done();
   }
 

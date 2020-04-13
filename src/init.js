@@ -1,10 +1,6 @@
 (function() {
-  if (localStorage.getItem('ancientRiddle.clearDb')) {
-    DAO.clearDb();
-  }
-
   ImageLoader.isXDPI(function() {
-    return UI.getDimensions().width > DPI.H.width && UI.getDimensions().height > DPI.H.height;
+    return window.devicePixelRatio > 1.0 || UI.getDimensions().width > DPI.H.width && UI.getDimensions().height > DPI.H.height;
   });
 
   if (!DAO.isIntroNeeded()) {

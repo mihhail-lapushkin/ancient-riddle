@@ -66,7 +66,11 @@ Kinetic.Loading = (function() {
     },
 
     done: function() {
+      this.content.text.setOpacity(0);
+      this.content.bar.setOpacity(0);
       this.content.clickToStartText.setOpacity(1);
+
+      this.getParent().draw();
     },
 
     fadeIn: function() {
