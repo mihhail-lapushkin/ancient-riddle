@@ -1,12 +1,13 @@
 UI = (function() {
   var PADDING = 0.016;
   var MAX_RATIO = 15 / 9;
-  
+
   var dims;
 
   var stage;
   var canvas;
   var loading;
+  var loadingDone;
 
   var layer = {};
   var publicAPI = {};
@@ -15,7 +16,7 @@ UI = (function() {
     if (localStorage.getItem('ancientRiddle.width') === null) {
       localStorage.setItem('ancientRiddle.width', DPI.H.width);
     }
-  
+
     if (localStorage.getItem('ancientRiddle.height') === null) {
       localStorage.setItem('ancientRiddle.height', DPI.H.height);
     }
@@ -30,10 +31,14 @@ UI = (function() {
     if (stage) return;
 
     initStage();
-    
+
     canvas.add(loading = new Kinetic.Loading($.clone(dims)));
-    
-    loading.fadeIn();
+
+    if (loadingDone) {
+      loading.done();
+    } else {
+      loading.fadeIn();
+    }
   }
 
   function trackLoading(p) {
@@ -43,6 +48,8 @@ UI = (function() {
   }
 
   function endLoading() {
+    loadingDone = true;
+
     if (!loading) return;
 
     loading.done();
@@ -99,11 +106,11 @@ UI = (function() {
     canvas.add(layer.inactiveDisp = new Kinetic.InactiveDisplay($.clone(dims)));
     canvas.add(layer.menu = new Kinetic.Menu($.clone(dims)));
     canvas.add(layer.gameOver = new Kinetic.GameOver($.clone(dims)));
-    
+
     if (DAO.isIntroNeeded()) {
       canvas.add(layer.intro = new Kinetic.Intro($.clone(dims)));
     }
-    
+
     canvas.add(layer.message = new Kinetic.Message($.clone(dims)));
     canvas.add(layer.quit = new Kinetic.Quit($.clone(dims)));
     canvas.add(layer.fading = new Kinetic.Fading($.clone(dims)));
