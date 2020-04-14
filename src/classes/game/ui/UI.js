@@ -34,10 +34,10 @@ UI = (function() {
 
     canvas.add(loading = new Kinetic.Loading($.clone(dims)));
 
+    loading.fadeIn();
+
     if (loadingDone) {
       loading.done();
-    } else {
-      loading.fadeIn();
     }
   }
 
