@@ -34,7 +34,7 @@ ButtonController = $.Class({
   },
 
   quit: function() {
-    window.close();
+    UI.quit.hide();
   },
 
   paused: function() {
