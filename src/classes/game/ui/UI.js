@@ -82,7 +82,7 @@ UI = (function() {
 
   function buildStage() {
     stage = new Kinetic.Stage({
-      container: document.body,
+      container: document.getElementById(localStorage.getItem('ancientRiddle.containerId')) || document.body,
       width: getDimensions().width,
       height: getDimensions().height
     });
