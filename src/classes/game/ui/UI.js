@@ -13,17 +13,9 @@ UI = (function() {
   var publicAPI = {};
 
   function getDimensions() {
-    if (localStorage.getItem('ancientRiddle.width') === null) {
-      localStorage.setItem('ancientRiddle.width', DPI.H.width);
-    }
-
-    if (localStorage.getItem('ancientRiddle.height') === null) {
-      localStorage.setItem('ancientRiddle.height', DPI.H.height);
-    }
-
     return {
-      width: parseInt(localStorage.getItem('ancientRiddle.width')),
-      height: parseInt(localStorage.getItem('ancientRiddle.height'))
+      width: window.ancientRiddle_width || DPI.H.width,
+      height: window.ancientRiddle_height || DPI.H.height
     };
   }
 
@@ -82,7 +74,7 @@ UI = (function() {
 
   function buildStage() {
     stage = new Kinetic.Stage({
-      container: document.getElementById(localStorage.getItem('ancientRiddle.containerId')) || document.body,
+      container: document.getElementById(window.ancientRiddle_containerId) || document.body,
       width: getDimensions().width,
       height: getDimensions().height
     });
